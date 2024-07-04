@@ -5,6 +5,7 @@
   grid-auto-flow: column;
   grid-auto-columns: minmax(302px, 1fr);
   overflow-x: auto;
+  scroll-snap-type: x mandatory;
 }
 
 .scrollerContainer {
