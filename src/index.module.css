@@ -13,12 +13,20 @@
   --paper-bg: #22282a;
   --body-bg: #2f3334;
   --extra-bg: #3d4142;
+
+  --outline-border: #e7e3fc3b;
 }
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+*::-webkit-scrollbar {
+  display: none;
 }
 
 body {

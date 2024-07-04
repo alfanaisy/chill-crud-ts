@@ -1,12 +1,12 @@
+import { CgChevronDown } from 'react-icons/cg';
 import { Link } from 'react-router-dom';
 import { useMediaQuery } from 'usehooks-ts';
 
-import Logo from '../../assets/logo.svg';
-import LogoSmall from '../../assets/logo-sm.svg';
 import Avatar from '../../assets/avatar.svg';
+import LogoSmall from '../../assets/logo-sm.svg';
+import Logo from '../../assets/logo.svg';
 
 import styles from './navbar.module.css';
-import { CgChevronDown } from 'react-icons/cg';
 
 const Navbar = () => {
   const isMobile = useMediaQuery('(max-width: 768px)');
