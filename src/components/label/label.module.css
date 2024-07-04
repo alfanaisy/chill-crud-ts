@@ -1,0 +1,9 @@
+.label {
+  position: absolute;
+  color: white;
+  top: 10px;
+  left: 10px;
+  padding: 8px 10px;
+  border-radius: 16px;
+  text-transform: capitalize;
+}

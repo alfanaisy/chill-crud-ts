@@ -17,12 +17,11 @@ export const watchListData: IWatchList[] = [
     isLabeled: 'premium',
   },
   {
-    type: 'series',
+    type: 'film',
     id: 2,
     title: 'Shazam: Fury of the God',
     rating: 7.9,
     imageUrl: 'https://i.ibb.co.com/xJ2Xpzf/thumbnail-l-2.png',
-    isLabeled: 'new episode',
   },
   {
     type: 'series',
