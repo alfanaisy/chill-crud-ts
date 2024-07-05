@@ -1,53 +1,35 @@
-export interface ICatalogue {
-  type: 'film' | 'series';
-  id: number;
-  title: string;
-  rating: number;
-  imageUrl: string;
-  isLabeled?: 'premium' | 'new episode';
+import { ICatalogue } from './watch-list.data';
+
+export interface IMyList extends ICatalogue {
+  dateAdded: string;
 }
 
-export const watchListData: ICatalogue[] = [
+// const myList: IMyList = {};
+export const series: ICatalogue[] = [
   {
-    type: 'film',
-    id: 1,
-    title: "Don't Look Up",
+    type: 'series',
+    id: 21,
+    title: 'Duty After School',
     rating: 8.7,
-    imageUrl: 'https://i.ibb.co.com/4RBjT9r/thumbnail-l-1.png',
-    isLabeled: 'premium',
-  },
-  {
-    type: 'film',
-    id: 2,
-    title: 'Shazam: Fury of the God',
-    rating: 7.9,
-    imageUrl: 'https://i.ibb.co.com/xJ2Xpzf/thumbnail-l-2.png',
+    imageUrl: 'https://i.ibb.co.com/z2c32QR/thumbnail-p-new-1.png',
   },
   {
     type: 'series',
-    id: 3,
-    title: 'Blue Lock',
-    rating: 6.5,
-    imageUrl: 'https://i.ibb.co.com/h28TPb7/thumbnail-l-3.png',
-    isLabeled: 'new episode',
-  },
-  {
-    type: 'film',
-    id: 4,
-    title: 'A Man Called Otto',
-    rating: 9.1,
-    imageUrl: 'https://i.ibb.co.com/stkDV0L/thumbnail-l-4.png',
+    id: 22,
+    title: 'All of Us are Dead',
+    rating: 8.2,
+    imageUrl: 'https://i.ibb.co.com/4SDGGk0/thumbnail-p-new-2.png',
   },
   {
     type: 'series',
-    id: 5,
-    title: 'All of use are Dead',
-    rating: 7.2,
-    imageUrl: 'https://i.ibb.co.com/WDwSWFT/thumbnail-l-5.png',
+    id: 23,
+    title: 'Missing',
+    rating: 8.4,
+    imageUrl: 'https://i.ibb.co.com/Lt8TT4B/thumbnail-p-new-3.png',
   },
 ];
 
-export const todaysTop: ICatalogue[] = [
+export const movies: ICatalogue[] = [
   {
     type: 'film',
     id: 11,
@@ -112,3 +94,5 @@ export const todaysTop: ICatalogue[] = [
     imageUrl: 'https://i.ibb.co.com/826VpNW/thumbnail-p-tr-5.png',
   },
 ];
+
+export const allCatalogue = [...series, ...movies];
