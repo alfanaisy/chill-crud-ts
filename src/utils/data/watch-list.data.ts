@@ -1,4 +1,4 @@
-export interface IWatchList {
+export interface ICatalogue {
   type: 'film' | 'series';
   id: number;
   title: string;
@@ -7,7 +7,7 @@ export interface IWatchList {
   isLabeled?: 'premium' | 'new episode';
 }
 
-export const watchListData: IWatchList[] = [
+export const watchListData: ICatalogue[] = [
   {
     type: 'film',
     id: 1,
@@ -44,5 +44,64 @@ export const watchListData: IWatchList[] = [
     title: 'All of use are Dead',
     rating: 7.2,
     imageUrl: 'https://i.ibb.co.com/WDwSWFT/thumbnail-l-5.png',
+  },
+];
+
+export const todaysTop: ICatalogue[] = [
+  {
+    type: 'film',
+    id: 11,
+    title: 'Suzume',
+    rating: 8.7,
+    imageUrl: 'https://i.ibb.co.com/VCf6Fk5/thumbnail-p-1.png',
+  },
+  {
+    type: 'film',
+    id: 12,
+    title: 'Jurassic World: Dominion',
+    rating: 8.1,
+    imageUrl: 'https://i.ibb.co.com/6mvsS7X/thumbnail-p-2.png',
+  },
+  {
+    type: 'film',
+    id: 13,
+    title: 'Suzume',
+    rating: 8.7,
+    imageUrl: 'https://i.ibb.co.com/VCf6Fk5/thumbnail-p-1.png',
+  },
+  {
+    type: 'film',
+    id: 14,
+    title: 'Jurassic World: Dominion',
+    rating: 8.1,
+    imageUrl: 'https://i.ibb.co.com/6mvsS7X/thumbnail-p-2.png',
+  },
+  {
+    type: 'film',
+    id: 15,
+    title: 'Suzume',
+    rating: 8.7,
+    imageUrl: 'https://i.ibb.co.com/VCf6Fk5/thumbnail-p-1.png',
+  },
+  {
+    type: 'film',
+    id: 16,
+    title: 'Jurassic World: Dominion',
+    rating: 8.1,
+    imageUrl: 'https://i.ibb.co.com/6mvsS7X/thumbnail-p-2.png',
+  },
+  {
+    type: 'film',
+    id: 15,
+    title: 'Suzume',
+    rating: 8.7,
+    imageUrl: 'https://i.ibb.co.com/VCf6Fk5/thumbnail-p-1.png',
+  },
+  {
+    type: 'film',
+    id: 16,
+    title: 'Jurassic World: Dominion',
+    rating: 8.1,
+    imageUrl: 'https://i.ibb.co.com/6mvsS7X/thumbnail-p-2.png',
   },
 ];

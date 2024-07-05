@@ -1,10 +1,10 @@
-import { IWatchList } from '../../utils/data/watch-list.data';
+import { ICatalogue } from '../../utils/data/watch-list.data';
 
 import { IoStar } from 'react-icons/io5';
 import styles from './watch-list-item.module.css';
 import Label from '../label/label.component';
 
-const WatchListItem = ({ item }: { item: IWatchList }) => {
+const WatchListItem = ({ item }: { item: ICatalogue }) => {
   console.log(item);
   return (
     <div className={styles.itemContainer}>

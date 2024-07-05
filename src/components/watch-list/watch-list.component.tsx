@@ -1,12 +1,12 @@
 import { useWatchListStore } from '../../stores/watch-list-store';
-import { IWatchList } from '../../utils/data/watch-list.data';
+import { ICatalogue } from '../../utils/data/watch-list.data';
 import HorizontalScroller from '../horizontal-scroller/horizontal-scroller.component';
 import WatchListItem from '../watch-list-item/watch-list-item.component';
 
 import styles from './watch-list.module.css';
 
 const WatchList = () => {
-  const watchList: IWatchList[] = useWatchListStore((state) => state.watchlist);
+  const watchList: ICatalogue[] = useWatchListStore((state) => state.watchlist);
 
   return (
     <div className={styles.watchListContainer}>

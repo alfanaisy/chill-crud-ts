@@ -1,0 +1,14 @@
+.itemContainer {
+  border-radius: 8px;
+  overflow: hidden;
+  width: 234px;
+  height: 365px;
+  scroll-snap-align: start;
+  cursor: pointer;
+}
+
+.itemContainer img {
+  width: 234px;
+  height: 365px;
+  object-fit: cover;
+}
