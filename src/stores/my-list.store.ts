@@ -2,12 +2,14 @@ import { create } from 'zustand';
 import { combine } from 'zustand/middleware';
 import { immer } from 'zustand/middleware/immer';
 import { ICatalogue } from '../utils/data/watch-list.data';
+import { allCatalogue } from '../utils/data/my-list.data';
 
 export const useMyListStore = create(
   immer(
     combine(
       {
-        myList: [] as ICatalogue[],
+        // myList: [] as ICatalogue[],
+        myList: allCatalogue,
       },
       (set) => ({
         addToList(itemToAdd: ICatalogue) {
