@@ -5,9 +5,12 @@ import {
   IoMdVolumeOff,
 } from 'react-icons/io';
 import styles from './hero.module.css';
+import { useMediaQuery } from 'usehooks-ts';
 
 const Hero = () => {
   const [isMuted, setIsMuted] = useState(false);
+
+  const isMobile = useMediaQuery('(max-width:768px)');
 
   const toggleMute = () => {
     setIsMuted(!isMuted);
@@ -31,8 +34,8 @@ const Hero = () => {
         </div>
         <div className={styles.heroActions}>
           <div className={styles.actionButtons}>
-            <button className={styles.start}>Mulai</button>
-            <button className={styles.info}>
+            <button className={`${styles.btn} `}>Mulai</button>
+            <button className={`${styles.btn} ${styles.info} `}>
               <IoIosInformationCircleOutline />
               &nbsp;Selengkapnya
             </button>
@@ -40,9 +43,9 @@ const Hero = () => {
           </div>
           <span onClick={toggleMute} className={styles.volumeControl}>
             {isMuted ? (
-              <IoMdVolumeOff size={'24px'} />
+              <IoMdVolumeOff size={`${isMobile ? '20px' : '24px'}`} />
             ) : (
-              <IoMdVolumeHigh size={'24px'} />
+              <IoMdVolumeHigh size={`${isMobile ? '20px' : '24px'}`} />
             )}
           </span>
         </div>

@@ -49,3 +49,12 @@
   align-items: center;
   justify-content: center;
 }
+
+@media screen and (max-width: 768px) {
+  .leftArrow {
+    display: none;
+  }
+  .rightArrow {
+    display: none;
+  }
+}

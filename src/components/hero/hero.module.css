@@ -55,7 +55,8 @@
   display: flex;
   gap: 10px;
 }
-.start {
+
+.btn {
   color: var(--text-primary);
   background-color: var(--primary);
   outline: none;
@@ -68,18 +69,10 @@
   letter-spacing: 0.2px;
   cursor: pointer;
 }
+
 .info {
-  color: var(--text-primary);
   background-color: var(--paper-bg);
-  outline: none;
   border: 1px solid var(--paper-bg);
-  padding: 10px 26px;
-  border-radius: 48px;
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 22px;
-  letter-spacing: 0.2px;
-  cursor: pointer;
 
   display: flex;
   align-items: center;
@@ -110,4 +103,42 @@
 .volumeControl svg {
   vertical-align: text-top;
   color: var(--text-secondary);
+}
+
+@media screen and (max-width: 768px) {
+  .heroContainer {
+    height: calc(60vh);
+  }
+  .heroMeta {
+    width: 100%;
+  }
+  .heroContent {
+    padding: 0 16px 40px 16px;
+  }
+  .actionButtons {
+    gap: 6px;
+  }
+  .btn {
+    padding: 4px 12px;
+    font-size: 12px;
+    line-height: 16px;
+  }
+  .ageRating {
+    padding: 4px 8px;
+    font-size: 12px;
+  }
+  .volumeControl {
+    padding: 4px;
+  }
+  .title {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 28px;
+  }
+
+  .description {
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 16px;
+  }
 }

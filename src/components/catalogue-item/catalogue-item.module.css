@@ -13,3 +13,14 @@
   height: 365px;
   object-fit: cover;
 }
+
+@media screen and (max-width: 768px) {
+  .itemContainer {
+    width: 95px;
+    height: 145px;
+  }
+  .itemContainer img {
+    width: 95px;
+    height: 145px;
+  }
+}
