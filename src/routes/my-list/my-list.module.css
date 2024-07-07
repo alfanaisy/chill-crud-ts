@@ -6,16 +6,37 @@
   gap: 32px;
   padding: 40px 80px;
 }
-.container h3 {
+.headerContainer {
+  display: flex;
+  justify-content: space-between;
+}
+.headerContainer h3 {
   font-size: 32px;
   font-weight: 700;
   color: white;
 }
+.headerContainer a {
+  text-decoration: none;
+}
+.headerContainer h6 {
+  border: 1px solid var(--outline-border);
+  font-size: 16px;
+  font-weight: 600;
+  color: white;
+  padding: 14px 10px;
+  border-radius: 8px;
+}
 
 .myListContainer {
   max-width: 100%;
+  min-height: 28.7vh;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(234px, 1fr));
   column-gap: 16px;
   row-gap: 32px;
+}
+.myListContainer h5 {
+  font-size: 18px;
+  font-weight: 700;
+  color: white;
 }

@@ -1,4 +1,5 @@
 .itemContainer {
+  position: relative;
   border-radius: 8px;
   overflow: hidden;
   width: 234px;

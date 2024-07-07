@@ -61,6 +61,7 @@ export const todaysTop: ICatalogue[] = [
     title: 'Jurassic World: Dominion',
     rating: 8.1,
     imageUrl: 'https://i.ibb.co.com/6mvsS7X/thumbnail-p-2.png',
+    isLabeled: 'premium',
   },
   {
     type: 'film',

@@ -1,0 +1,63 @@
+.container {
+  position: relative;
+  background-color: var(--header-bg);
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding: 40px 80px;
+  min-height: 55vh;
+}
+
+h3 {
+  font-size: 32px;
+  font-weight: 700;
+  color: white;
+}
+
+.headerContainer {
+  display: flex;
+  justify-content: space-between;
+}
+.headerContainer h3 {
+  font-size: 32px;
+  font-weight: 700;
+  color: white;
+}
+.headerContainer button {
+  background-color: var(--header-bg);
+  border: 2px solid var(--outline-border);
+  font-size: 16px;
+  font-weight: 600;
+  color: white;
+  padding: 14px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th {
+  padding: 10px;
+}
+.table thead {
+  background-color: var(--text-primary);
+  color: var(--body-bg);
+}
+.table tbody {
+  text-align: center;
+}
+.table tbody tr {
+  border-bottom: 1px solid white;
+}
+.table tbody td {
+  padding: 10px 0;
+}
+
+.tableImg {
+  width: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+}
