@@ -12,3 +12,9 @@
   font-weight: 700;
   color: white;
 }
+
+@media screen and (max-width: 768px) {
+  .watchListContainer {
+    padding: 6px 28px;
+  }
+}

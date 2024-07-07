@@ -25,4 +25,14 @@
   border-radius: 8px;
   padding: 8px 6px;
   cursor: pointer;
+  border: none;
+  color: white;
+  font-weight: 700;
+  background-color: var(--primary);
+}
+
+@media screen and (max-width: 768px) {
+  .formContainer form {
+    width: 80vw;
+  }
 }

@@ -46,6 +46,6 @@ body {
 
 @media only screen and (max-width: 768px) {
   .content {
-    padding-top: 56px;
+    margin-top: 56px;
   }
 }
