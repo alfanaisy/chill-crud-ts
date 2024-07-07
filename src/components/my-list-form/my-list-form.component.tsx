@@ -1,6 +1,5 @@
-import { FormEvent, useEffect, useState } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { ICatalogue } from '../../utils/data/watch-list.data';
-
 import styles from './my-list-form.module.css';
 
 interface Props {
@@ -8,100 +7,53 @@ interface Props {
   onSubmitHandler: (values: ICatalogue) => void;
 }
 
-const defaultFormValue = {
-  title: '',
-  imageUrl: '',
-  rating: '',
-  type: '',
-};
-
 const MyListForm = ({ item, onSubmitHandler }: Props) => {
-  const [formValues, setFormValues] = useState(defaultFormValue);
-  const { title, imageUrl, rating, type } = formValues;
+  const { register, handleSubmit } = useForm<Partial<ICatalogue>>({
+    defaultValues: {
+      title: item?.title,
+      imageUrl: item?.imageUrl,
+      rating: item?.rating,
+      type: item?.type,
+    },
+  });
 
-  useEffect(() => {
-    if (item) {
-      setFormValues({
-        title: item.title,
-        imageUrl: item.imageUrl,
-        rating: item.rating.toLocaleString(),
-        type: item.type,
-      });
-    }
-  }, [item]);
-
-  const onChangeHandler = (e: FormEvent<HTMLInputElement>) => {
-    const { name, value } = e.currentTarget;
-
-    setFormValues({ ...formValues, [name]: value });
-  };
-
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    const itemToSubmit: ICatalogue = {
+  const onSubmit: SubmitHandler<Partial<ICatalogue>> = (data) => {
+    const newItem: ICatalogue = {
       id: Math.random(),
-      title,
-      imageUrl,
-      rating: Number(rating),
-      type: 'series',
+      title: data.title!,
+      imageUrl: data.imageUrl!,
+      rating: data.rating!,
+      type: data.type!,
     };
 
     if (item) {
-      itemToSubmit.id = item.id;
+      newItem.id = item.id;
     }
 
-    // console.log('Form Component:', itemToSubmit);
-
-    onSubmitHandler(itemToSubmit);
+    onSubmitHandler(newItem);
   };
 
   return (
     <div className={styles.formContainer}>
-      <form onSubmit={onSubmit}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div className={styles.inputGroup}>
           <label htmlFor="title">Title</label>
-          <input
-            type="text"
-            id="title"
-            name="title"
-            placeholder="Title"
-            value={title}
-            onChange={onChangeHandler}
-          />
+          <input {...register('title')} />
         </div>
         <div className={styles.inputGroup}>
           <label htmlFor="imageUrl">Image URL</label>
-          <input
-            type="text"
-            id="imageUrl"
-            name="imageUrl"
-            placeholder="Image URL"
-            value={imageUrl}
-            onChange={onChangeHandler}
-          />
+          <input {...register('imageUrl')} />
         </div>
         <div className={styles.inputGroup}>
           <label htmlFor="rating">Rating</label>
-          <input
-            type="text"
-            id="rating"
-            name="rating"
-            placeholder="Rating"
-            value={rating}
-            onChange={onChangeHandler}
-          />
+          <input {...register('rating')} />
         </div>
         <div className={styles.inputGroup}>
           <label htmlFor="type">Type</label>
-          <input
-            type="text"
-            id="type"
-            name="type"
-            placeholder="series | film"
-            value={type}
-            onChange={onChangeHandler}
-          />
+          <select {...register('type')}>
+            <option value="series">Series</option>
+            <option value="film">Film</option>
+          </select>
         </div>
 
         <button type="submit">{item ? 'Edit' : 'Tambah'}</button>

@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useMyListStore } from '../../stores/my-list.store';
 import styles from './my-list-data.module.css';
+import { BiEdit, BiTrash } from 'react-icons/bi';
 
 const MyListData = () => {
   const myList = useMyListStore((state) => state.myList);
@@ -21,7 +22,9 @@ const MyListData = () => {
         </button>
       </div>
       {myList.length === 0 ? (
-        <h6>Tidak ada data</h6>
+        <h6 className={styles.noData}>
+          Belum ada data. Silakan tambahkan data
+        </h6>
       ) : (
         <div>
           <table className={styles.table}>
@@ -48,14 +51,22 @@ const MyListData = () => {
                   <td>{item.title}</td>
                   <td>{item.rating}</td>
                   <td>
-                    <button
-                      onClick={() => {
-                        navigate(`/my-list-data/${item.id}`);
-                      }}
-                    >
-                      Edit
-                    </button>
-                    <button onClick={() => deleteItem(item.id)}>Delete</button>
+                    <div className={styles.btnContainer}>
+                      <button
+                        className={`${styles.btn} ${styles.edit}`}
+                        onClick={() => {
+                          navigate(`/my-list-data/${item.id}`);
+                        }}
+                      >
+                        <BiEdit />
+                      </button>
+                      <button
+                        className={`${styles.btn} ${styles.delete}`}
+                        onClick={() => deleteItem(item.id)}
+                      >
+                        <BiTrash />
+                      </button>
+                    </div>
                   </td>
                 </tr>
               ))}

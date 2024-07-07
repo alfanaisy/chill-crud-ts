@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from 'react-router-dom';
-import MyListForm from '../../../components/my-list-form/my-list-form.component';
 import { useMyListStore } from '../../../stores/my-list.store';
 import { ICatalogue } from '../../../utils/data/watch-list.data';
+import MyListForm from '../../../components/my-list-form/my-list-form.component';
 
 const Edit = () => {
   const { id } = useParams();

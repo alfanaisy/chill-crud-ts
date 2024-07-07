@@ -61,3 +61,34 @@ h3 {
   object-fit: cover;
   border-radius: 8px;
 }
+
+.btnContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn {
+  padding: 10px 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: none;
+  border-radius: 4px;
+  color: white;
+}
+
+.edit {
+  background-color: var(--warning);
+}
+
+.delete {
+  background-color: var(--error);
+}
+
+.noData {
+  font-size: 22px;
+  color: white;
+}

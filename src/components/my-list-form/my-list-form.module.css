@@ -1,21 +1,22 @@
 .formContainer {
   padding: 40px 60px;
   display: flex;
-  /* justify-content: center; */
+  justify-content: center;
 }
 
 .formContainer form {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  width: 50vw;
 }
 
 .inputGroup {
   display: flex;
   flex-direction: column;
 }
-.inputGroup input {
-  /* height: 24px; */
+.inputGroup input,
+.inputGroup select {
   border-radius: 8px;
   padding: 8px 6px;
 }

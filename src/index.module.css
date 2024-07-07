@@ -4,6 +4,7 @@
 :root {
   --primary: #0f1e93;
   --warning: #b7a207;
+  --error: #ff5b3a;
 
   --text-dark-primary: #3a3541de;
   --text-dark-secondary: #3a3541ad;

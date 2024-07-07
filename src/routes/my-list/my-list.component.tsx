@@ -15,10 +15,12 @@ const MyList = () => {
           <h6>Ubah Data</h6>
         </Link>
       </div>
+      {myList.length === 0 && (
+        <h5 className={styles.noData}>
+          Belum ada yang kamu tambahkan ke Daftar
+        </h5>
+      )}
       <div className={styles.myListContainer}>
-        {myList.length === 0 && (
-          <h5>Belum ada yang kamu tambahkan ke Daftar</h5>
-        )}
         {myList.map((item) => (
           <CatalogueItem key={item.id} item={item} />
         ))}

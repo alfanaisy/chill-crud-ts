@@ -18,12 +18,6 @@ const Navbar = () => {
           <img src={isMobile ? LogoSmall : Logo} alt="navbar-logo" />
         </Link>
 
-        <Link className={styles.navItem} to="/series">
-          <span>Series</span>
-        </Link>
-        <Link className={styles.navItem} to="/film">
-          <span>Film</span>
-        </Link>
         <Link className={styles.navItem} to="/my-list">
           <span>Daftar Saya</span>
         </Link>

@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
-import MyListForm from '../../../components/my-list-form/my-list-form.component';
 import { useMyListStore } from '../../../stores/my-list.store';
 import { ICatalogue } from '../../../utils/data/watch-list.data';
+import MyListForm from '../../../components/my-list-form/my-list-form.component';
 
 const Add = () => {
   const navigate = useNavigate();
