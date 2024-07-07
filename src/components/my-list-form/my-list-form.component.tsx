@@ -38,19 +38,19 @@ const MyListForm = ({ item, onSubmitHandler }: Props) => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className={styles.inputGroup}>
           <label htmlFor="title">Title</label>
-          <input {...register('title')} />
+          <input {...register('title', { required: true })} />
         </div>
         <div className={styles.inputGroup}>
           <label htmlFor="imageUrl">Image URL</label>
-          <input {...register('imageUrl')} />
+          <input {...register('imageUrl', { required: true })} />
         </div>
         <div className={styles.inputGroup}>
           <label htmlFor="rating">Rating</label>
-          <input {...register('rating')} />
+          <input {...(register('rating'), { required: true })} />
         </div>
         <div className={styles.inputGroup}>
           <label htmlFor="type">Type</label>
-          <select {...register('type')}>
+          <select {...(register('type'), { required: true })}>
             <option value="series">Series</option>
             <option value="film">Film</option>
           </select>
