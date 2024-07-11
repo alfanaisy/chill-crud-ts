@@ -2,10 +2,12 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import Layout from './Layout';
 import Home from './routes/home/home.component';
-import MyList from './routes/my-list/my-list.component';
-import MyListData from './routes/my-list-data/my-list-data.component';
-import Edit from './routes/my-list-data/edit/edit.component';
+import Login from './routes/login/login.component';
 import Add from './routes/my-list-data/add/add.component';
+import Edit from './routes/my-list-data/edit/edit.component';
+import MyListData from './routes/my-list-data/my-list-data.component';
+import MyList from './routes/my-list/my-list.component';
+import Register from './routes/register/register.component';
 
 function App() {
   const routes = createBrowserRouter([
@@ -25,11 +27,11 @@ function App() {
     },
     {
       path: '/login',
-      element: <h1>Login Page</h1>,
+      element: <Login />,
     },
     {
       path: '/register',
-      element: <h1>Register Page</h1>,
+      element: <Register />,
     },
   ]);
 
