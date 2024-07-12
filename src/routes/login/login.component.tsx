@@ -64,9 +64,11 @@ const Login = () => {
           </div>
         </div>
         <div className={styles.formAction}>
-          <button className={`${styles.btn} ${styles.signinBtn}`}>Masuk</button>
+          <button type="submit" className={`${styles.btn} ${styles.signinBtn}`}>
+            Masuk
+          </button>
           <span>Atau</span>
-          <button className={`${styles.btn} ${styles.googleBtn}`}>
+          <button type="button" className={`${styles.btn} ${styles.googleBtn}`}>
             <span>
               <FcGoogle size="18px" />
             </span>
