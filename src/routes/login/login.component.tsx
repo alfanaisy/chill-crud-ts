@@ -42,7 +42,7 @@ const Login = () => {
           />
         </div>
         <div className={styles.inputGroup}>
-          <label htmlFor="password">Password</label>
+          <label htmlFor="password">Kata sandi</label>
           <input
             type="password"
             id="password"

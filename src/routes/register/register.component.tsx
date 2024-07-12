@@ -39,7 +39,7 @@ const Register = () => {
           />
         </div>
         <div className={styles.inputGroup}>
-          <label htmlFor="password">Password</label>
+          <label htmlFor="password">Kata sandi</label>
           <input
             type="password"
             id="password"
@@ -48,7 +48,7 @@ const Register = () => {
           />
         </div>
         <div className={styles.inputGroup}>
-          <label htmlFor="cfmPassword">Password</label>
+          <label htmlFor="cfmPassword">Konfirmasi kata sandi</label>
           <input
             type="password"
             id="cfmPassword"
