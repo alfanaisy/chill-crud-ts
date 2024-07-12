@@ -8,11 +8,7 @@ interface Props {
 }
 
 const MyListForm = ({ item, onSubmitHandler }: Props) => {
-  const {
-    register,
-    handleSubmit,
-    formState: { defaultValues },
-  } = useForm<Partial<ICatalogue>>({
+  const { register, handleSubmit } = useForm<Partial<ICatalogue>>({
     defaultValues: {
       title: item?.title,
       imageUrl: item?.imageUrl,
@@ -20,8 +16,6 @@ const MyListForm = ({ item, onSubmitHandler }: Props) => {
       type: item?.type,
     },
   });
-
-  console.log(defaultValues);
 
   const onSubmit: SubmitHandler<Partial<ICatalogue>> = (data) => {
     const newItem: ICatalogue = {

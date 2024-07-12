@@ -1,0 +1,133 @@
+.container {
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loginForm {
+  background-color: var(--header-bg);
+  width: 529px;
+  opacity: 0.84;
+  padding: 40px;
+  border-radius: 16px;
+  color: white;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 37px;
+}
+
+.loginForm img {
+  height: 44px;
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+}
+
+.title h4 {
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 32.2px;
+}
+
+.title p {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 22.4px;
+  letter-spacing: 0.2px;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+}
+.inputGroup label {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 25.2px;
+  letter-spacing: 0.2px;
+}
+.inputGroup input {
+  padding: 14px 20px;
+  border-radius: 24px;
+  background-color: transparent;
+  color: white;
+  border: 1px solid var(--outline-border);
+  outline: var(--outline-border);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 22.4px;
+  letter-spacing: 0.2px;
+}
+::-ms-reveal {
+  filter: invert(100%);
+}
+::placeholder {
+  font-family: 'Lato';
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 22.4px;
+  color: var(--text-secondary);
+}
+
+.forgotPassword {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 6px;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 22.4px;
+  letter-spacing: 0.2px;
+}
+.forgotPassword a {
+  color: white;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.formAction {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+  width: 100%;
+  color: white;
+}
+.formAction .btn {
+  width: 100%;
+  padding: 14px 20px;
+  border-radius: 24px;
+  border: 1px solid var(--outline-border);
+  font-size: 16px;
+  font-weigth: 600;
+  line-height: 22.4px;
+  letter-spacing: 0.2px;
+  font-family: 'Lato';
+  color: white;
+  cursor: pointer;
+}
+.formAction span {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 19.6px;
+}
+.signinBtn {
+  background-color: var(--extra-bg);
+}
+.googleBtn {
+  background-color: transparent;
+}
+.googleBtn svg {
+  vertical-align: text-bottom;
+  margin-right: 8px;
+}
