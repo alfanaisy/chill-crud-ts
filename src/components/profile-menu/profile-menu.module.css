@@ -1,0 +1,33 @@
+.container {
+  position: absolute;
+  top: 92px;
+  right: 64px;
+  width: 156px;
+  background-color: var(--header-bg);
+  border-radius: 4px;
+  padding: 4px 0;
+  cursor: pointer;
+
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.menuItem {
+  padding: 8px 12px;
+  font-size: 14px;
+  line-height: 19.4px;
+  font-weight: 500;
+  letter-spacing: 0.2px;
+}
+.menuItem span {
+  width: 24px;
+  height: 24px;
+}
+.menuItem svg {
+  vertical-align: text-bottom;
+  margin-right: 6px;
+}
+.menuItem:hover {
+  color: var(--primary);
+}

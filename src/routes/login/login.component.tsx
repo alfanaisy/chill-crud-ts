@@ -2,7 +2,7 @@ import styles from './login.module.css';
 
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { FcGoogle } from 'react-icons/fc';
-import { Link, Navigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import LoginBg from '../../assets/login-bg.jpg';
 import Logo from '../../assets/logo.svg';
 import useUserStore from '../../stores/user.store';
@@ -16,7 +16,7 @@ type InputFormType = {
 const Login = () => {
   const { register, handleSubmit } = useForm<InputFormType>();
 
-  const { signIn, currentUser } = useUserStore();
+  const { signIn } = useUserStore();
 
   const onSubmit: SubmitHandler<InputFormType> = async (data) => {
     const { email, password } = data;
@@ -26,7 +26,7 @@ const Login = () => {
 
   return (
     <>
-      {currentUser && <Navigate to={'/'} />}
+      {/* {currentUser && <Navigate to={'/'} />} */}
       <div
         className={styles.container}
         style={{

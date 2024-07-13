@@ -1,11 +1,10 @@
 import { useForm } from 'react-hook-form';
 import styles from './register.module.css';
 
-import RegisterBg from '../../assets/register-bg.jpg';
-import Logo from '../../assets/logo.svg';
-import { Link, Navigate } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc';
-import useUserStore from '../../stores/user.store';
+import { Link } from 'react-router-dom';
+import Logo from '../../assets/logo.svg';
+import RegisterBg from '../../assets/register-bg.jpg';
 
 type RegisterFormType = {
   email: string;
@@ -16,11 +15,11 @@ type RegisterFormType = {
 const Register = () => {
   const { register, handleSubmit } = useForm<RegisterFormType>();
 
-  const currentUser = useUserStore((state) => state.currentUser);
+  // const currentUser = useUserStore((state) => state.currentUser);
 
   return (
     <>
-      {currentUser && <Navigate to={'/'} />}
+      {/* {currentUser && <Navigate to={'/'} />} */}
       <div
         className={styles.container}
         style={{

@@ -7,9 +7,12 @@ import LogoSmall from '../../assets/logo-sm.svg';
 import Logo from '../../assets/logo.svg';
 
 import styles from './navbar.module.css';
+import { useState } from 'react';
+import ProfileMenu from '../profile-menu/profile-menu.component';
 
 const Navbar = () => {
   const isMobile = useMediaQuery('(max-width: 768px)');
+  const [isShowMenu, setIsShowMenu] = useState(false);
 
   return (
     <nav className={styles.navbar}>
@@ -22,12 +25,16 @@ const Navbar = () => {
           <span>Daftar Saya</span>
         </Link>
       </div>
-      <div className={styles.profileMenu}>
+      <div
+        className={styles.profileMenu}
+        onClick={() => setIsShowMenu(!isShowMenu)}
+      >
         <img src={Avatar} alt="avatar pic" />
         <span>
           <CgChevronDown />
         </span>
       </div>
+      {isShowMenu && <ProfileMenu />}
     </nav>
   );
 };

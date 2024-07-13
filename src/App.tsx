@@ -8,20 +8,43 @@ import Edit from './routes/my-list-data/edit/edit.component';
 import MyListData from './routes/my-list-data/my-list-data.component';
 import MyList from './routes/my-list/my-list.component';
 import Register from './routes/register/register.component';
+import ProtectedRoute from './routes/protected-route/protected-route.component';
+import AuthRoute from './routes/auth-route/auth-route.component';
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Layout />}>
+        <Route
+          path="/"
+          element={
+            <ProtectedRoute>
+              <Layout />
+            </ProtectedRoute>
+          }
+        >
           <Route index element={<Home />} />
           <Route path="my-list" element={<MyList />} />
           <Route path="my-list-data" element={<MyListData />} />
           <Route path="my-list-data/add" element={<Add />} />
           <Route path="my-list-data/:id" element={<Edit />} />
         </Route>
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+        <Route
+          path="/login"
+          element={
+            <AuthRoute>
+              <Login />
+            </AuthRoute>
+          }
+        />
+        <Route
+          path="/register"
+          element={
+            <AuthRoute>
+              <Register />
+            </AuthRoute>
+          }
+        />
       </Routes>
     </Router>
   );
