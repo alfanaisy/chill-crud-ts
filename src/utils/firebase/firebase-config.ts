@@ -3,7 +3,9 @@ import { initializeApp } from 'firebase/app';
 import {
   createUserWithEmailAndPassword,
   getAuth,
+  GoogleAuthProvider,
   signInWithEmailAndPassword,
+  signInWithPopup,
   signOut,
 } from 'firebase/auth';
 // TODO: Add SDKs for Firebase products that you want to use
@@ -31,6 +33,14 @@ export const signInWithCreds = (email: string, password: string) =>
 
 export const signUpWithCreds = (email: string, password: string) =>
   createUserWithEmailAndPassword(auth, email, password);
+
+const googleProvider = new GoogleAuthProvider();
+
+googleProvider.setCustomParameters({
+  prompt: 'select_account',
+});
+
+export const signInGooglePopup = () => signInWithPopup(auth, googleProvider);
 
 export const signOutUser = () => signOut(auth);
 

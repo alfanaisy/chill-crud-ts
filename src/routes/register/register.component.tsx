@@ -5,6 +5,8 @@ import { FcGoogle } from 'react-icons/fc';
 import { Link } from 'react-router-dom';
 import Logo from '../../assets/logo.svg';
 import RegisterBg from '../../assets/register-bg.jpg';
+import { signInGooglePopup } from '../../utils/firebase/firebase-config';
+import useUserStore from '../../stores/user.store';
 
 type RegisterFormType = {
   email: string;
@@ -15,11 +17,15 @@ type RegisterFormType = {
 const Register = () => {
   const { register, handleSubmit } = useForm<RegisterFormType>();
 
-  // const currentUser = useUserStore((state) => state.currentUser);
+  const signIn = useUserStore((state) => state.signIn);
+
+  const signupWithGoogle = async () => {
+    const res = await signInGooglePopup();
+    signIn(res.user);
+  };
 
   return (
     <>
-      {/* {currentUser && <Navigate to={'/'} />} */}
       <div
         className={styles.container}
         style={{
@@ -79,6 +85,7 @@ const Register = () => {
             <button
               type="button"
               className={`${styles.btn} ${styles.googleBtn}`}
+              onClick={signupWithGoogle}
             >
               <span>
                 <FcGoogle size="18px" />

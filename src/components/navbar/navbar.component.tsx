@@ -9,10 +9,13 @@ import Logo from '../../assets/logo.svg';
 import styles from './navbar.module.css';
 import { useState } from 'react';
 import ProfileMenu from '../profile-menu/profile-menu.component';
+import useUserStore from '../../stores/user.store';
 
 const Navbar = () => {
   const isMobile = useMediaQuery('(max-width: 768px)');
   const [isShowMenu, setIsShowMenu] = useState(false);
+
+  const currentUser = useUserStore((state) => state.currentUser);
 
   return (
     <nav className={styles.navbar}>
@@ -29,7 +32,7 @@ const Navbar = () => {
         className={styles.profileMenu}
         onClick={() => setIsShowMenu(!isShowMenu)}
       >
-        <img src={Avatar} alt="avatar pic" />
+        <img src={currentUser?.photoURL || Avatar} alt="avatar pic" />
         <span>
           <CgChevronDown />
         </span>

@@ -6,7 +6,10 @@ import { Link } from 'react-router-dom';
 import LoginBg from '../../assets/login-bg.jpg';
 import Logo from '../../assets/logo.svg';
 import useUserStore from '../../stores/user.store';
-import { signInWithCreds } from '../../utils/firebase/firebase-config';
+import {
+  signInGooglePopup,
+  signInWithCreds,
+} from '../../utils/firebase/firebase-config';
 
 type InputFormType = {
   email: string;
@@ -24,9 +27,13 @@ const Login = () => {
     signIn(user);
   };
 
+  const loginWithGoogle = async () => {
+    const res = await signInGooglePopup();
+    signIn(res.user);
+  };
+
   return (
     <>
-      {/* {currentUser && <Navigate to={'/'} />} */}
       <div
         className={styles.container}
         style={{
@@ -82,6 +89,7 @@ const Login = () => {
             <button
               type="button"
               className={`${styles.btn} ${styles.googleBtn}`}
+              onClick={loginWithGoogle}
             >
               <span>
                 <FcGoogle size="18px" />
