@@ -5,7 +5,6 @@ import styles from './watch-list-item.module.css';
 import Label from '../label/label.component';
 
 const WatchListItem = ({ item }: { item: ICatalogue }) => {
-  console.log(item);
   return (
     <div className={styles.itemContainer}>
       <img src={item.imageUrl} alt={item.title} width={'302px'} />

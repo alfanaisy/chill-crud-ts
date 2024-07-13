@@ -3,11 +3,12 @@ import styles from './register.module.css';
 
 import RegisterBg from '../../assets/register-bg.jpg';
 import Logo from '../../assets/logo.svg';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc';
+import useUserStore from '../../stores/user.store';
 
 type RegisterFormType = {
-  username: string;
+  email: string;
   password: string;
   cfmPassword: string;
 };
@@ -15,69 +16,80 @@ type RegisterFormType = {
 const Register = () => {
   const { register, handleSubmit } = useForm<RegisterFormType>();
 
+  const currentUser = useUserStore((state) => state.currentUser);
+
   return (
-    <div
-      className={styles.container}
-      style={{
-        backgroundImage: `url(${RegisterBg})`,
-        backgroundPosition: 'center',
-      }}
-    >
-      <form onSubmit={handleSubmit(() => {})} className={styles.loginForm}>
-        <img src={Logo} alt="brand-logo" />
-        <div className={styles.title}>
-          <h4>Daftar</h4>
-          <p>Selamat datang!</p>
-        </div>
-        <div className={styles.inputGroup}>
-          <label htmlFor="username">Username</label>
-          <input
-            type="text"
-            id="username"
-            placeholder="Masukkan username"
-            {...register('username', { required: true })}
-          />
-        </div>
-        <div className={styles.inputGroup}>
-          <label htmlFor="password">Kata sandi</label>
-          <input
-            type="password"
-            id="password"
-            placeholder="Masukkan kata sandi"
-            {...register('password', { required: true })}
-          />
-        </div>
-        <div className={styles.inputGroup}>
-          <label htmlFor="cfmPassword">Konfirmasi kata sandi</label>
-          <input
-            type="password"
-            id="cfmPassword"
-            placeholder="Masukkan kata sandi"
-            {...register('cfmPassword', { required: true })}
-          />
-          <div className={styles.forgotPassword}>
-            <p>
-              Sudah punya akun?{' '}
-              <Link to="/login">
-                <span>Masuk</span>
-              </Link>
-            </p>
+    <>
+      {currentUser && <Navigate to={'/'} />}
+      <div
+        className={styles.container}
+        style={{
+          backgroundImage: `url(${RegisterBg})`,
+          backgroundPosition: 'center',
+        }}
+      >
+        <form onSubmit={handleSubmit(() => {})} className={styles.loginForm}>
+          <img src={Logo} alt="brand-logo" />
+          <div className={styles.title}>
+            <h4>Daftar</h4>
+            <p>Selamat datang!</p>
           </div>
-        </div>
-        <div className={styles.formAction}>
-          <button type="submit" className={`${styles.btn} ${styles.signinBtn}`}>
-            Daftar
-          </button>
-          <span>Atau</span>
-          <button type="button" className={`${styles.btn} ${styles.googleBtn}`}>
-            <span>
-              <FcGoogle size="18px" />
-            </span>
-            Daftar dengan Google
-          </button>
-        </div>
-      </form>
-    </div>
+          <div className={styles.inputGroup}>
+            <label htmlFor="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              placeholder="Masukkan email"
+              {...register('email', { required: true })}
+            />
+          </div>
+          <div className={styles.inputGroup}>
+            <label htmlFor="password">Kata sandi</label>
+            <input
+              type="password"
+              id="password"
+              placeholder="Masukkan kata sandi"
+              {...register('password', { required: true })}
+            />
+          </div>
+          <div className={styles.inputGroup}>
+            <label htmlFor="cfmPassword">Konfirmasi kata sandi</label>
+            <input
+              type="password"
+              id="cfmPassword"
+              placeholder="Masukkan kata sandi"
+              {...register('cfmPassword', { required: true })}
+            />
+            <div className={styles.forgotPassword}>
+              <p>
+                Sudah punya akun?{' '}
+                <Link to="/login">
+                  <span>Masuk</span>
+                </Link>
+              </p>
+            </div>
+          </div>
+          <div className={styles.formAction}>
+            <button
+              type="submit"
+              className={`${styles.btn} ${styles.signinBtn}`}
+            >
+              Daftar
+            </button>
+            <span>Atau</span>
+            <button
+              type="button"
+              className={`${styles.btn} ${styles.googleBtn}`}
+            >
+              <span>
+                <FcGoogle size="18px" />
+              </span>
+              Daftar dengan Google
+            </button>
+          </div>
+        </form>
+      </div>
+    </>
   );
 };
 
