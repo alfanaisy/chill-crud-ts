@@ -1,11 +1,14 @@
-import { useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import styles from './register.module.css';
 
 import { FcGoogle } from 'react-icons/fc';
 import { Link } from 'react-router-dom';
 import Logo from '../../assets/logo.svg';
 import RegisterBg from '../../assets/register-bg.jpg';
-import { signInGooglePopup } from '../../utils/firebase/firebase-config';
+import {
+  signInGooglePopup,
+  signUpWithCreds,
+} from '../../utils/firebase/firebase-config';
 import useUserStore from '../../stores/user.store';
 
 type RegisterFormType = {
@@ -18,6 +21,13 @@ const Register = () => {
   const { register, handleSubmit } = useForm<RegisterFormType>();
 
   const signIn = useUserStore((state) => state.signIn);
+
+  const onSubmit: SubmitHandler<RegisterFormType> = async (data) => {
+    const { email, password, cfmPassword } = data;
+    if (password !== cfmPassword) return;
+    const res = await signUpWithCreds(email, password);
+    signIn(res.user);
+  };
 
   const signupWithGoogle = async () => {
     const res = await signInGooglePopup();
@@ -33,7 +43,7 @@ const Register = () => {
           backgroundPosition: 'center',
         }}
       >
-        <form onSubmit={handleSubmit(() => {})} className={styles.loginForm}>
+        <form onSubmit={handleSubmit(onSubmit)} className={styles.loginForm}>
           <img src={Logo} alt="brand-logo" />
           <div className={styles.title}>
             <h4>Daftar</h4>
