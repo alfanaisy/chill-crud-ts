@@ -2,10 +2,15 @@ import { useNavigate } from 'react-router-dom';
 import { useMyListStore } from '../../stores/my-list.store';
 import styles from './my-list-data.module.css';
 import { BiEdit, BiTrash } from 'react-icons/bi';
+import useMyList from '../../hooks/useMyList';
+import useUserStore from '../../stores/user.store';
 
 const MyListData = () => {
-  const myList = useMyListStore((state) => state.myList);
-  const deleteItem = useMyListStore((state) => state.deleteItem);
+  // const myList = useMyListStore((state) => state.myList);
+  // const deleteItem = useMyListStore((state) => state.deleteItem);
+
+  const user = useUserStore((state) => state.currentUser);
+  const { data } = useMyList(user!.uid);
 
   const navigate = useNavigate();
 
@@ -21,7 +26,7 @@ const MyListData = () => {
           Add Data
         </button>
       </div>
-      {myList.length === 0 ? (
+      {data?.length === 0 ? (
         <h6 className={styles.noData}>
           Belum ada data. Silakan tambahkan data
         </h6>
@@ -38,7 +43,7 @@ const MyListData = () => {
               </tr>
             </thead>
             <tbody>
-              {myList.map((item, idx) => (
+              {data?.map((item, idx) => (
                 <tr key={item.id}>
                   <td>{idx + 1}</td>
                   <td>
@@ -62,7 +67,7 @@ const MyListData = () => {
                       </button>
                       <button
                         className={`${styles.btn} ${styles.delete}`}
-                        onClick={() => deleteItem(item.id)}
+                        // onClick={() => deleteItem(item.id)}
                       >
                         <BiTrash />
                       </button>
