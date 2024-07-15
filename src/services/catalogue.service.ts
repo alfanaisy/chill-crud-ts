@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import apiClient from './axios-instance';
 
 export interface ICatalogue {
@@ -24,6 +24,14 @@ const hooks = {
           },
         });
 
+        return res.data;
+      },
+    });
+  },
+  useCreateCatalogue: () => {
+    return useMutation({
+      mutationFn: async (newItem: Partial<ICatalogue>) => {
+        const res = await apiClient.post(`catalogue`, newItem);
         return res.data;
       },
     });

@@ -1,44 +1,31 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { ICatalogue2 } from '../../utils/data/watch-list.data';
+import { catalogueService, ICatalogue } from '../../services/catalogue.service';
 import styles from './my-list-form.module.css';
+import useAuthStore from '../../stores/auth.store';
+import { useNavigate } from 'react-router-dom';
 
-interface Props {
-  item?: ICatalogue2;
-  onSubmitHandler: (values: ICatalogue2) => void;
-}
-
-const MyListForm = ({ item, onSubmitHandler }: Props) => {
-  const {
-    register,
-    handleSubmit,
-    formState: { defaultValues },
-  } = useForm<Partial<ICatalogue2>>({
+const MyListForm = ({ item }: { item?: ICatalogue }) => {
+  const { register, handleSubmit } = useForm<Partial<ICatalogue>>({
     defaultValues: {
       title: item?.title,
       imageUrl: item?.imageUrl,
-      rating: item?.rating,
+      rating: Number(item?.rating) | 0,
       type: item?.type,
     },
   });
 
-  console.log(defaultValues);
+  const navigate = useNavigate();
 
-  const onSubmit: SubmitHandler<Partial<ICatalogue2>> = (data) => {
-    const newItem: ICatalogue2 = {
-      id: Math.random(),
-      title: data.title!,
-      imageUrl: data.imageUrl!,
-      rating: data.rating!,
-      type: data.type!,
-    };
+  const { mutateAsync: addItem, isPending } =
+    catalogueService.hooks.useCreateCatalogue();
 
-    if (item) {
-      newItem.id = item.id;
+  const session = useAuthStore((state) => state.session);
+
+  const onSubmit: SubmitHandler<Partial<ICatalogue>> = async (data) => {
+    if (!item) {
+      await addItem({ ...data, userId: session?.user.id });
+      navigate('/my-list-data');
     }
-    console.log('onSubmit data', data);
-    console.log('onSubmit', newItem);
-
-    onSubmitHandler(newItem);
   };
 
   return (
@@ -64,7 +51,9 @@ const MyListForm = ({ item, onSubmitHandler }: Props) => {
           </select>
         </div>
 
-        <button type="submit">{item ? 'Edit' : 'Tambah'}</button>
+        <button type="submit" disabled={isPending}>
+          {item ? 'Edit' : 'Tambah'}
+        </button>
       </form>
     </div>
   );
