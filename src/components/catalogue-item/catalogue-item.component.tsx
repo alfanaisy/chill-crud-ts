@@ -1,4 +1,4 @@
-import { ICatalogue } from '../../utils/data/watch-list.data';
+import { ICatalogue } from '../../services/catalogue.service';
 import Label from '../label/label.component';
 
 import styles from './catalogue-item.module.css';

@@ -1,10 +1,10 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { ICatalogue } from '../../utils/data/watch-list.data';
+import { ICatalogue2 } from '../../utils/data/watch-list.data';
 import styles from './my-list-form.module.css';
 
 interface Props {
-  item?: ICatalogue;
-  onSubmitHandler: (values: ICatalogue) => void;
+  item?: ICatalogue2;
+  onSubmitHandler: (values: ICatalogue2) => void;
 }
 
 const MyListForm = ({ item, onSubmitHandler }: Props) => {
@@ -12,7 +12,7 @@ const MyListForm = ({ item, onSubmitHandler }: Props) => {
     register,
     handleSubmit,
     formState: { defaultValues },
-  } = useForm<Partial<ICatalogue>>({
+  } = useForm<Partial<ICatalogue2>>({
     defaultValues: {
       title: item?.title,
       imageUrl: item?.imageUrl,
@@ -23,8 +23,8 @@ const MyListForm = ({ item, onSubmitHandler }: Props) => {
 
   console.log(defaultValues);
 
-  const onSubmit: SubmitHandler<Partial<ICatalogue>> = (data) => {
-    const newItem: ICatalogue = {
+  const onSubmit: SubmitHandler<Partial<ICatalogue2>> = (data) => {
+    const newItem: ICatalogue2 = {
       id: Math.random(),
       title: data.title!,
       imageUrl: data.imageUrl!,

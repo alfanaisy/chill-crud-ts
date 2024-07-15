@@ -1,10 +1,10 @@
-import { AuthChangeEvent, Session, User } from '@supabase/supabase-js';
+import { AuthChangeEvent, Session } from '@supabase/supabase-js';
 import { create } from 'zustand';
 import { supabase } from '../utils/supabase/supabase-client';
 
 interface AuthStoreState {
   session: Session | null;
-  setUser: (user: User | null) => void;
+  setSession: (session: Session | null) => void;
   signUp: (email: string, password: string) => Promise<void>;
   signIn: (email: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
@@ -12,7 +12,7 @@ interface AuthStoreState {
 
 const useAuthStore = create<AuthStoreState>()((set) => ({
   session: null,
-  setUser: (session) => ({ session }),
+  setSession: (session) => set({ session }),
   signUp: async (email, password) => {
     const { data, error } = await supabase.auth.signUp({ email, password });
     if (error) throw error;

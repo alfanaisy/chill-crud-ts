@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import { useMyListStore } from '../../../stores/my-list.store';
-import { ICatalogue } from '../../../utils/data/watch-list.data';
+import { ICatalogue2 } from '../../../utils/data/watch-list.data';
 import MyListForm from '../../../components/my-list-form/my-list-form.component';
 
 const Edit = () => {
@@ -12,7 +12,7 @@ const Edit = () => {
 
   const foundList = myList.find((item) => item.id === Number(id));
 
-  const onSubmit = (values: ICatalogue) => {
+  const onSubmit = (values: ICatalogue2) => {
     updateItem(values);
     navigate('/my-list-data');
   };

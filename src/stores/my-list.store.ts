@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { combine } from 'zustand/middleware';
 import { immer } from 'zustand/middleware/immer';
-import { ICatalogue } from '../utils/data/watch-list.data';
+import { ICatalogue2 } from '../utils/data/watch-list.data';
 import { allCatalogue } from '../utils/data/my-list.data';
 
 export const useMyListStore = create(
@@ -12,7 +12,7 @@ export const useMyListStore = create(
         myList: allCatalogue,
       },
       (set) => ({
-        addToList(itemToAdd: ICatalogue) {
+        addToList(itemToAdd: ICatalogue2) {
           set((state) => {
             state.myList.push(itemToAdd);
           });
@@ -22,7 +22,7 @@ export const useMyListStore = create(
             state.myList = state.myList.filter((item) => item.id !== id);
           }, true);
         },
-        updateItem(itemToUpdate: ICatalogue) {
+        updateItem(itemToUpdate: ICatalogue2) {
           set((state) => {
             const item = state.myList.find((i) => i.id === itemToUpdate.id);
 

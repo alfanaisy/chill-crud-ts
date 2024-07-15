@@ -1,4 +1,4 @@
-export interface ICatalogue {
+export interface ICatalogue2 {
   type: 'film' | 'series';
   id: number;
   title: string;
@@ -7,7 +7,7 @@ export interface ICatalogue {
   isLabeled?: 'premium' | 'new episode';
 }
 
-export const watchListData: ICatalogue[] = [
+export const watchListData: ICatalogue2[] = [
   {
     type: 'film',
     id: 1,
@@ -47,7 +47,7 @@ export const watchListData: ICatalogue[] = [
   },
 ];
 
-export const todaysTop: ICatalogue[] = [
+export const todaysTop: ICatalogue2[] = [
   {
     type: 'film',
     id: 11,

@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useMyListStore } from '../../../stores/my-list.store';
-import { ICatalogue } from '../../../utils/data/watch-list.data';
+import { ICatalogue2 } from '../../../utils/data/watch-list.data';
 import MyListForm from '../../../components/my-list-form/my-list-form.component';
 
 const Add = () => {
@@ -8,7 +8,7 @@ const Add = () => {
 
   const addToList = useMyListStore((state) => state.addToList);
 
-  const onSubmit = (values: ICatalogue) => {
+  const onSubmit = (values: ICatalogue2) => {
     addToList(values);
     navigate('/my-list-data');
   };
