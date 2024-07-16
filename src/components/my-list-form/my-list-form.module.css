@@ -2,6 +2,7 @@
   padding: 40px 60px;
   display: flex;
   justify-content: center;
+  background-color: var(--header-bg);
 }
 
 .formContainer form {

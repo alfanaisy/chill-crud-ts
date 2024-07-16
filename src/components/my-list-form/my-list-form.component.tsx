@@ -1,29 +1,63 @@
+import { useEffect } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { useNavigate, useParams } from 'react-router-dom';
 import { catalogueService, ICatalogue } from '../../services/catalogue.service';
-import styles from './my-list-form.module.css';
 import useAuthStore from '../../stores/auth.store';
-import { useNavigate } from 'react-router-dom';
+import styles from './my-list-form.module.css';
 
-const MyListForm = ({ item }: { item?: ICatalogue }) => {
-  const { register, handleSubmit } = useForm<Partial<ICatalogue>>({
+const MyListForm = () => {
+  const navigate = useNavigate();
+
+  const { id } = useParams();
+  const isAddMode = !id;
+
+  console.log(isAddMode ? 'add-mode' : id);
+
+  const session = useAuthStore((state) => state.session);
+  const { data } = catalogueService.hooks.useFindCatalogue(
+    session!.user.id,
+    Number(id)
+  );
+
+  const { register, handleSubmit, reset } = useForm<Partial<ICatalogue>>({
     defaultValues: {
-      title: item?.title,
-      imageUrl: item?.imageUrl,
-      rating: Number(item?.rating) | 0,
-      type: item?.type,
+      title: data?.[0].title,
+      imageUrl: data?.[0].imageUrl,
+      rating: data?.[0].rating,
+      type: data?.[0].type,
     },
   });
 
-  const navigate = useNavigate();
+  useEffect(() => {
+    console.log('effect fired', data?.[0].title);
+    if (data) {
+      reset({
+        title: data?.[0].title,
+        imageUrl: data?.[0].imageUrl,
+        rating: data?.[0].rating,
+        type: data?.[0].type,
+      });
+    }
+  }, [data, reset]);
 
   const { mutateAsync: addItem, isPending } =
     catalogueService.hooks.useCreateCatalogue();
 
-  const session = useAuthStore((state) => state.session);
+  const { mutateAsync: updateItem } = catalogueService.hooks.useEditCatalogue();
 
   const onSubmit: SubmitHandler<Partial<ICatalogue>> = async (data) => {
-    if (!item) {
+    if (isAddMode) {
       await addItem({ ...data, userId: session?.user.id });
+      navigate('/my-list-data');
+    } else {
+      const valuesToUpdate = {
+        id: Number(id),
+        newItem: {
+          ...data,
+          userId: session?.user.id,
+        },
+      };
+      await updateItem(valuesToUpdate);
       navigate('/my-list-data');
     }
   };
@@ -52,7 +86,7 @@ const MyListForm = ({ item }: { item?: ICatalogue }) => {
         </div>
 
         <button type="submit" disabled={isPending}>
-          {item ? 'Edit' : 'Tambah'}
+          {isAddMode ? 'Tambah' : 'Edit'}
         </button>
       </form>
     </div>

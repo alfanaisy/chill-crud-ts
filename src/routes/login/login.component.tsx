@@ -16,16 +16,12 @@ const Login = () => {
   const { register, handleSubmit } = useForm<InputFormType>();
 
   const signIn = useAuthStore((state) => state.signIn);
+  const signInWithGoogle = useAuthStore((state) => state.signInWithGoogle);
 
   const onSubmit: SubmitHandler<InputFormType> = async (data) => {
     const { email, password } = data;
     await signIn(email, password);
   };
-
-  // const loginWithGoogle = async () => {
-  //   const res = await signInGooglePopup();
-  //   signIn(res.user);
-  // };
 
   return (
     <>
@@ -84,7 +80,7 @@ const Login = () => {
             <button
               type="button"
               className={`${styles.btn} ${styles.googleBtn}`}
-              // onClick={loginWithGoogle}
+              onClick={signInWithGoogle}
             >
               <span>
                 <FcGoogle size="18px" />

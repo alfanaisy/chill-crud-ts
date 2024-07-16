@@ -8,6 +8,7 @@ interface AuthStoreState {
   signUp: (email: string, password: string) => Promise<void>;
   signIn: (email: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
+  signInWithGoogle: () => Promise<void>;
 }
 
 const useAuthStore = create<AuthStoreState>()((set) => ({
@@ -29,6 +30,13 @@ const useAuthStore = create<AuthStoreState>()((set) => ({
   logout: async () => {
     await supabase.auth.signOut();
     set({ session: null });
+  },
+  signInWithGoogle: async () => {
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+    });
+    if (error) throw error;
+    console.log(data);
   },
 }));
 

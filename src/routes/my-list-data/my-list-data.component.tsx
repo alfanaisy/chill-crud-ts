@@ -7,6 +7,8 @@ import styles from './my-list-data.module.css';
 const MyListData = () => {
   const session = useAuthStore((state) => state.session);
   const { data } = catalogueService.hooks.useGetCatalogues(session!.user.id);
+  const { mutateAsync: deleteItem, isPending } =
+    catalogueService.hooks.useDeleteCatalogue();
 
   const navigate = useNavigate();
 
@@ -56,14 +58,18 @@ const MyListData = () => {
                       <button
                         className={`${styles.btn} ${styles.edit}`}
                         onClick={() => {
-                          navigate(`/my-list-data/${item.id}`);
+                          navigate(`/my-list-data/edit/${item.id}`);
                         }}
+                        disabled={isPending}
                       >
                         <BiEdit />
                       </button>
                       <button
                         className={`${styles.btn} ${styles.delete}`}
-                        // onClick={() => deleteItem(item.id)}
+                        onClick={async () => {
+                          await deleteItem(item.id);
+                        }}
+                        disabled={isPending}
                       >
                         <BiTrash />
                       </button>

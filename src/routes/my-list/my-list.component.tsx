@@ -14,8 +14,6 @@ const MyList = () => {
 
   if (error) console.log(error);
 
-  console.log(data);
-
   return (
     <div className={styles.container}>
       <div className={styles.headerContainer}>

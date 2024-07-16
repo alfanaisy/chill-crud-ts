@@ -20,26 +20,3 @@ apiClient.interceptors.request.use(
 );
 
 export default apiClient;
-
-// const updateHeader = async () => {
-//   try {
-//     await useAuthStore.getState().fetchSession();
-//     const session = useAuthStore.getState().session;
-
-//     if (session?.access_token) {
-//       apiClient.defaults.headers.common[
-//         'Authorization'
-//       ] = `Bearer ${session.access_token}`;
-//       apiClient.defaults.headers.common['apiKey'] = session.access_token;
-//     } else {
-//       delete apiClient.defaults.headers.common['Authorization'];
-//       delete apiClient.defaults.headers.common['apiKey'];
-//     }
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
-
-// updateHeader();
-
-// useAuthStore.subscribe(updateHeader);
