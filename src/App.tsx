@@ -32,6 +32,7 @@ function App() {
           }
         >
           <Route index element={<Home />} />
+          <Route path="home" element={<Home />} />
           <Route path="my-list" element={<MyList />} />
           <Route path="my-list-data" element={<MyListData />} />
           <Route path="my-list-data/add" element={<MyListForm />} />
