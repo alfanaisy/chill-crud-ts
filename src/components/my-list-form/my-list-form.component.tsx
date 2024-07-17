@@ -1,44 +1,65 @@
+import { useEffect } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { ICatalogue } from '../../utils/data/watch-list.data';
+import { useNavigate, useParams } from 'react-router-dom';
+import { catalogueService, ICatalogue } from '../../services/catalogue.service';
+import useAuthStore from '../../stores/auth.store';
 import styles from './my-list-form.module.css';
 
-interface Props {
-  item?: ICatalogue;
-  onSubmitHandler: (values: ICatalogue) => void;
-}
+const MyListForm = () => {
+  const navigate = useNavigate();
 
-const MyListForm = ({ item, onSubmitHandler }: Props) => {
-  const {
-    register,
-    handleSubmit,
-    formState: { defaultValues },
-  } = useForm<Partial<ICatalogue>>({
+  const { id } = useParams();
+  const isAddMode = !id;
+
+  console.log(isAddMode ? 'add-mode' : id);
+
+  const session = useAuthStore((state) => state.session);
+  const { data } = catalogueService.hooks.useFindCatalogue(
+    session!.user.id,
+    Number(id)
+  );
+
+  const { register, handleSubmit, reset } = useForm<Partial<ICatalogue>>({
     defaultValues: {
-      title: item?.title,
-      imageUrl: item?.imageUrl,
-      rating: item?.rating,
-      type: item?.type,
+      title: data?.[0].title,
+      imageUrl: data?.[0].imageUrl,
+      rating: data?.[0].rating,
+      type: data?.[0].type,
     },
   });
 
-  console.log(defaultValues);
-
-  const onSubmit: SubmitHandler<Partial<ICatalogue>> = (data) => {
-    const newItem: ICatalogue = {
-      id: Math.random(),
-      title: data.title!,
-      imageUrl: data.imageUrl!,
-      rating: data.rating!,
-      type: data.type!,
-    };
-
-    if (item) {
-      newItem.id = item.id;
+  useEffect(() => {
+    console.log('effect fired', data?.[0].title);
+    if (data) {
+      reset({
+        title: data?.[0].title,
+        imageUrl: data?.[0].imageUrl,
+        rating: data?.[0].rating,
+        type: data?.[0].type,
+      });
     }
-    console.log('onSubmit data', data);
-    console.log('onSubmit', newItem);
+  }, [data, reset]);
 
-    onSubmitHandler(newItem);
+  const { mutateAsync: addItem, isPending } =
+    catalogueService.hooks.useCreateCatalogue();
+
+  const { mutateAsync: updateItem } = catalogueService.hooks.useEditCatalogue();
+
+  const onSubmit: SubmitHandler<Partial<ICatalogue>> = async (data) => {
+    if (isAddMode) {
+      await addItem({ ...data, userId: session?.user.id });
+      navigate('/my-list-data');
+    } else {
+      const valuesToUpdate = {
+        id: Number(id),
+        newItem: {
+          ...data,
+          userId: session?.user.id,
+        },
+      };
+      await updateItem(valuesToUpdate);
+      navigate('/my-list-data');
+    }
   };
 
   return (
@@ -64,7 +85,9 @@ const MyListForm = ({ item, onSubmitHandler }: Props) => {
           </select>
         </div>
 
-        <button type="submit">{item ? 'Edit' : 'Tambah'}</button>
+        <button type="submit" disabled={isPending}>
+          {isAddMode ? 'Tambah' : 'Edit'}
+        </button>
       </form>
     </div>
   );

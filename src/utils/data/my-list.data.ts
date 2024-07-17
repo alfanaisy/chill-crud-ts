@@ -1,11 +1,11 @@
-import { ICatalogue } from './watch-list.data';
+import { ICatalogue2 } from './watch-list.data';
 
-export interface IMyList extends ICatalogue {
+export interface IMyList extends ICatalogue2 {
   dateAdded: string;
 }
 
 // const myList: IMyList = {};
-export const series: ICatalogue[] = [
+export const series: ICatalogue2[] = [
   {
     type: 'series',
     id: 21,
@@ -29,7 +29,7 @@ export const series: ICatalogue[] = [
   },
 ];
 
-export const movies: ICatalogue[] = [
+export const movies: ICatalogue2[] = [
   {
     type: 'film',
     id: 11,

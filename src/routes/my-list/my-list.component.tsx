@@ -1,11 +1,18 @@
 import { Link } from 'react-router-dom';
 import CatalogueItem from '../../components/catalogue-item/catalogue-item.component';
-import { useMyListStore } from '../../stores/my-list.store';
 
+import { catalogueService } from '../../services/catalogue.service';
+import useAuthStore from '../../stores/auth.store';
 import styles from './my-list.module.css';
 
 const MyList = () => {
-  const myList = useMyListStore((state) => state.myList);
+  const session = useAuthStore((state) => state.session);
+
+  const { data, error } = catalogueService.hooks.useGetCatalogues(
+    session!.user.id
+  );
+
+  if (error) console.log(error);
 
   return (
     <div className={styles.container}>
@@ -15,13 +22,13 @@ const MyList = () => {
           <h6>Ubah Data</h6>
         </Link>
       </div>
-      {myList.length === 0 && (
+      {data?.length === 0 && (
         <h5 className={styles.noData}>
           Belum ada yang kamu tambahkan ke Daftar
         </h5>
       )}
       <div className={styles.myListContainer}>
-        {myList.map((item) => (
+        {data?.map((item) => (
           <CatalogueItem key={item.id} item={item} />
         ))}
       </div>
