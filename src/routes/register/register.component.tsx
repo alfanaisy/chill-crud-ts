@@ -17,17 +17,13 @@ const Register = () => {
   const { register, handleSubmit } = useForm<RegisterFormType>();
 
   const signUp = useAuthStore((state) => state.signUp);
+  const signInWithGoogle = useAuthStore((state) => state.signInWithGoogle);
 
   const onSubmit: SubmitHandler<RegisterFormType> = async (data) => {
     const { email, password, cfmPassword } = data;
     if (password !== cfmPassword) return;
     await signUp(email, password);
   };
-
-  // const signupWithGoogle = async () => {
-  //   const res = await signInGooglePopup();
-  //   signIn(res.user);
-  // };
 
   return (
     <>
@@ -90,7 +86,7 @@ const Register = () => {
             <button
               type="button"
               className={`${styles.btn} ${styles.googleBtn}`}
-              // onClick={signupWithGoogle}
+              onClick={signInWithGoogle}
             >
               <span>
                 <FcGoogle size="18px" />

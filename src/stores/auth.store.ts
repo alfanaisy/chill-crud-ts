@@ -9,16 +9,21 @@ interface AuthStoreState {
   signIn: (email: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
   signInWithGoogle: () => Promise<void>;
+  handleAuthChange: (event: AuthChangeEvent, session: Session | null) => void;
+  init: () => void;
 }
 
 const useAuthStore = create<AuthStoreState>()((set) => ({
   session: null,
+
   setSession: (session) => set({ session }),
+
   signUp: async (email, password) => {
     const { data, error } = await supabase.auth.signUp({ email, password });
     if (error) throw error;
     set({ session: data.session });
   },
+
   signIn: async (email, password) => {
     const { data, error } = await supabase.auth.signInWithPassword({
       email,
@@ -27,31 +32,50 @@ const useAuthStore = create<AuthStoreState>()((set) => ({
     if (error) throw error;
     set({ session: data.session });
   },
+
   logout: async () => {
     await supabase.auth.signOut();
     set({ session: null });
   },
+
   signInWithGoogle: async () => {
-    const { data, error } = await supabase.auth.signInWithOAuth({
+    const { error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
+      options: {
+        redirectTo: `${window.location.origin}/oauth/callback`,
+      },
     });
     if (error) throw error;
-    console.log(data);
+    const { data } = await supabase.auth.getSession();
+    if (!error && data.session) {
+      useAuthStore.getState().handleAuthChange('SIGNED_IN', data.session);
+    }
+  },
+
+  handleAuthChange: (event, session) => {
+    console.log('authChangeHandler: ', event, session);
+    if (event === 'SIGNED_IN' || event === 'INITIAL_SESSION') {
+      set({ session });
+    } else if (event === 'SIGNED_OUT') {
+      set({ session: null });
+    }
+  },
+
+  init: async () => {
+    const { data, error } = await supabase.auth.getSession();
+    console.log('init called with data: ', data);
+    if (error) throw error;
+    const existingSession = data.session;
+    if (existingSession) {
+      set({ session: existingSession });
+    }
   },
 }));
 
-supabase.auth.onAuthStateChange(
-  (event: AuthChangeEvent, session: Session | null) => {
-    if (event === 'SIGNED_IN') {
-      useAuthStore.setState({
-        session,
-      });
-    } else if (event === 'SIGNED_OUT') {
-      useAuthStore.setState({
-        session: null,
-      });
-    }
-  }
-);
+supabase.auth.onAuthStateChange((event, session) => {
+  useAuthStore.getState().handleAuthChange(event, session);
+});
+
+useAuthStore.getState().init();
 
 export default useAuthStore;

@@ -1,5 +1,6 @@
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 
+import { useEffect } from 'react';
 import MyListForm from './components/my-list-form/my-list-form.component';
 import Layout from './Layout';
 import AuthRoute from './routes/auth-route/auth-route.component';
@@ -9,39 +10,15 @@ import MyListData from './routes/my-list-data/my-list-data.component';
 import MyList from './routes/my-list/my-list.component';
 import ProtectedRoute from './routes/protected-route/protected-route.component';
 import Register from './routes/register/register.component';
-import { useEffect } from 'react';
-import { supabase } from './utils/supabase/supabase-client';
 import useAuthStore from './stores/auth.store';
+import OAuthCallback from './routes/oauth-callback/oauth-callback.component';
 
 function App() {
-  const setSession = useAuthStore((state) => state.setSession);
+  const init = useAuthStore((state) => state.init);
 
   useEffect(() => {
-    const { data: authListener } = supabase.auth.onAuthStateChange(
-      (_, session) => {
-        console.log('session: ', session);
-        if (session) {
-          setSession(session);
-        } else {
-          setSession(null);
-        }
-      }
-    );
-
-    const checkInitialSession = async () => {
-      const {
-        data: { session },
-      } = await supabase.auth.getSession();
-      if (session) {
-        setSession(session);
-      }
-    };
-    checkInitialSession();
-
-    return () => {
-      authListener.subscription.unsubscribe();
-    };
-  }, [setSession]);
+    init();
+  }, [init]);
 
   return (
     <Router>
@@ -76,6 +53,7 @@ function App() {
             </AuthRoute>
           }
         />
+        <Route path="/oauth/callback" element={<OAuthCallback />} />
       </Routes>
     </Router>
   );
