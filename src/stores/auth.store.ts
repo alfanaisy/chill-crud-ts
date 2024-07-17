@@ -53,7 +53,6 @@ const useAuthStore = create<AuthStoreState>()((set) => ({
   },
 
   handleAuthChange: (event, session) => {
-    console.log('authChangeHandler: ', event, session);
     if (event === 'SIGNED_IN' || event === 'INITIAL_SESSION') {
       set({ session });
     } else if (event === 'SIGNED_OUT') {
@@ -63,7 +62,6 @@ const useAuthStore = create<AuthStoreState>()((set) => ({
 
   init: async () => {
     const { data, error } = await supabase.auth.getSession();
-    console.log('init called with data: ', data);
     if (error) throw error;
     const existingSession = data.session;
     if (existingSession) {

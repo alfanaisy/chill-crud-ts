@@ -11,8 +11,6 @@ const MyListForm = () => {
   const { id } = useParams();
   const isAddMode = !id;
 
-  console.log(isAddMode ? 'add-mode' : id);
-
   const session = useAuthStore((state) => state.session);
   const { data } = catalogueService.hooks.useFindCatalogue(
     session!.user.id,
@@ -29,7 +27,6 @@ const MyListForm = () => {
   });
 
   useEffect(() => {
-    console.log('effect fired', data?.[0].title);
     if (data) {
       reset({
         title: data?.[0].title,
