@@ -8,11 +8,13 @@ import styles from './my-list.module.css';
 const MyList = () => {
   const session = useAuthStore((state) => state.session);
 
-  const { data, error } = catalogueService.hooks.useGetCatalogues(
+  const { data, error, isLoading } = catalogueService.hooks.useGetCatalogues(
     session!.user.id
   );
 
-  if (error) console.log(error);
+  if (error) return <p>Error: {error.message}</p>;
+
+  if (isLoading) return <p>Loading...</p>;
 
   return (
     <div className={styles.container}>

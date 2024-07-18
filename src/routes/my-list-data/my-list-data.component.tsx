@@ -6,11 +6,15 @@ import styles from './my-list-data.module.css';
 
 const MyListData = () => {
   const session = useAuthStore((state) => state.session);
-  const { data } = catalogueService.hooks.useGetCatalogues(session!.user.id);
+  const { data, isLoading } = catalogueService.hooks.useGetCatalogues(
+    session!.user.id
+  );
   const { mutateAsync: deleteItem, isPending } =
     catalogueService.hooks.useDeleteCatalogue();
 
   const navigate = useNavigate();
+
+  if (isLoading) return <p>Loading...</p>;
 
   return (
     <div className={styles.container}>
