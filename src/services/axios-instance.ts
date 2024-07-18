@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { supabaseKey } from '../utils/supabase/supabase-client';
 
-const BASE_API_URL = 'https://nbpdygiwxlsthzeqqugs.supabase.co/rest/v1/';
+const BASE_API_URL = import.meta.env.VITE_BASE_API_URL;
 
 const apiClient = axios.create({
   baseURL: BASE_API_URL,

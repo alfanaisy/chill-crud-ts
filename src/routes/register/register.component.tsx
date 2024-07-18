@@ -21,7 +21,10 @@ const Register = () => {
 
   const onSubmit: SubmitHandler<RegisterFormType> = async (data) => {
     const { email, password, cfmPassword } = data;
-    if (password !== cfmPassword) return;
+    if (password !== cfmPassword) {
+      alert('Password doesnt match');
+      return;
+    }
     await signUp(email, password);
   };
 
